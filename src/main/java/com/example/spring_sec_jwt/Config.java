@@ -5,4 +5,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 @Configuration
 public class Config extends WebSecurityConfigurerAdapter {
+
+    //todo - here continue
 }
