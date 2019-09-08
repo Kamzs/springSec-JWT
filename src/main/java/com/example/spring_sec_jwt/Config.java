@@ -53,10 +53,16 @@ public class Config extends WebSecurityConfigurerAdapter {
         //tu można zakończyć ale poniżej dodany fragment mówiący że zapytania na wszystkie inne URL już wymagają roli admina
         .anyRequest().hasRole("ADMIN")
         //zeby dac mozliwosc zweryfikowania uprawnien (np. roli) to trzeba dodac formatke logowania
+                //formatka dziala na zasadzie przeniesiania na url /login i tam zalogowania - w przypadku sukcesu dostep
         .and().formLogin()
         //trzeba tez okreslic kto moze widziec samą stronę logowania
         .permitAll()
+        //poniższe dodaje pod url /logout możliwość wylogowania
+        .and().logout()
         ;
+
+        //po logowaniu spring security wysyła do przegladrki ciasteczko
+        //dostep do cookies F12
     }
 
 
