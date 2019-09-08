@@ -50,7 +50,7 @@ public class Config extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/cytaty").permitAll()
-                .antMatchers(HttpMethod.POST, "/cytaty").hasRole("MOD")
+                .antMatchers(HttpMethod.POST, "/cytaty").hasAnyRole("MOD","ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/cytaty").hasRole("ADMIN")
                 .and()
                 .formLogin().permitAll()
