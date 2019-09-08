@@ -14,7 +14,7 @@ public class MainController {
         return "main page";
     }
 
-    //pod tym url (tj. kazdym innym niz powyzszy) dostęp ma tylko admin - tj. dostajemy error 403
+    //pod tym url (tj. kazdym innym niz powyzszy) dostęp ma tylko admin
     @GetMapping("/a")
     @ResponseBody
     public String getOther ()

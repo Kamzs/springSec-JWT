@@ -18,13 +18,21 @@ public class Config extends WebSecurityConfigurerAdapter {
 
         //metoda withDefault... przechowuje login i haslo plain textem
         //normalnie to powynno byc zaszyfrowane np BCryptem (albo innym algorytmem sluzacym do szyfrowania hasel)
-        UserDetails userDetails = User.withDefaultPasswordEncoder()
+        UserDetails user = User.withDefaultPasswordEncoder()
                 .username("user")
                 .password("user1")
                 .roles("USER")
                 .build();
+
+        UserDetails admin = User.withDefaultPasswordEncoder()
+                .username("admin")
+                .password("admin1")
+                .roles("ADMIN")
+                .build();
+
+
         //ponizsze zapisuje uzytkownika w pamieci - w full wersji zapis do bazy danych
-        return new InMemoryUserDetailsManager(userDetails);
+        return new InMemoryUserDetailsManager(user,admin);
 
     }
 
@@ -43,7 +51,11 @@ public class Config extends WebSecurityConfigurerAdapter {
         */
         .permitAll()
         //tu można zakończyć ale poniżej dodany fragment mówiący że zapytania na wszystkie inne URL już wymagają roli admina
-        .anyRequest().hasRole("admin")
+        .anyRequest().hasRole("ADMIN")
+        //zeby dac mozliwosc zweryfikowania uprawnien (np. roli) to trzeba dodac formatke logowania
+        .and().formLogin()
+        //trzeba tez okreslic kto moze widziec samą stronę logowania
+        .permitAll()
         ;
     }
 
